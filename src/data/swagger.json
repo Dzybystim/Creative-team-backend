@@ -262,7 +262,7 @@
       }
     },
     "/users/logout": {
-      "post": {
+      "get": {
         "tags": [
           "Users"
         ],
@@ -548,13 +548,47 @@
         "tags": [
           "Other"
         ],
-        "summary": "Get personal information about the user, and information about the user's pets.",
+        "summary": "Get personal information about the user, and information about the user's pets",
         "parameters": [],
         "security": [
           {
             "Bearer": []
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/uploadAvatar": {
+      "post": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Upload a picture/photo/avatar and get a link to it",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK \"Successful operation\""
