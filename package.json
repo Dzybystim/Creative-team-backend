@@ -1,10 +1,10 @@
 {
-  "name": "template",
-  "version": "0.0.0",
+  "name": "creative_team_7",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
+    "start": "cross-env NODE_ENV=production node ./src/server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./src/server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
   },
@@ -13,8 +13,10 @@
     "cross-env": "7.0.3",
     "dotenv": "^16.0.3",
     "express": "4.17.1",
+    "joi": "^17.8.4",
     "mongoose": "^7.0.2",
-    "morgan": "1.10.0"
+    "morgan": "1.10.0",
+    "swagger-ui-express": "^4.6.2"
   },
   "devDependencies": {
     "eslint": "7.19.0",
