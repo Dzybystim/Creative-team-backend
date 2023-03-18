@@ -1,5 +1,12 @@
+const { User } = require("../../schemas/user");
+
 async function logout(req, res) {
-  return res.status(504).json({ message: "logout not implemented" });
+  const { id } = req.user;
+  await User.findByIdAndUpdate(id, { accessToken: null });
+  res.status(200).json({
+    code: 200,
+    message: "logout success",
+  });
 }
 
 module.exports = logout;
