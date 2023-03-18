@@ -26,6 +26,11 @@ const userSchema = mongoose.Schema(
     mobilePhone: {
       type: String,
     },
+    birthdate: {
+      type: Date,
+    },
+    photoURL: String,
+    selecteds: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
     pets: [{ type: mongoose.Schema.Types.ObjectId, ref: "pet" }],
     notices: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
     accessToken: {
