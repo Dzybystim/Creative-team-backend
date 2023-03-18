@@ -1,36 +1,47 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.7.0",
+    "version": "0.0.1",
     "title": "Petly API 1.0",
-    "description": "Creative team 7 back-end API for Petly",
+    "description": "Creative team 7 back-end API",
     "contact": {
-      "email": "petly@petly.club"
+      "email": "petly@petly.com"
     }
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://backend.petly.com"
     },
     {
-      "url": "http://backend.petly.club"
+      "url": "http://backend.petly.com"
+    },
+    {
+      "url": "http://localhost:3000"
     }
   ],
   "tags": [
     {
-      "name": "Auth",
-      "description": "Authorization endpoints"
+      "name": "Users",
+      "description": "Users endpoints"
     },
     {
-      "name": "Finance",
-      "description": "Finances endpoints"
+      "name": "Notices",
+      "description": "Notices endpoints"
+    },
+    {
+      "name": "Pets",
+      "description": "Pets endpoints"
+    },
+    {
+      "name": "Other",
+      "description": "Other endpoints"
     }
   ],
   "paths": {
     "/users/signup": {
       "post": {
         "tags": [
-          "Auth"
+          "Users"
         ],
         "summary": "User registration",
         "parameters": [],
@@ -123,7 +134,7 @@
     "/users/login": {
       "post": {
         "tags": [
-          "Auth"
+          "Users"
         ],
         "summary": "User login",
         "parameters": [],
@@ -219,6 +230,337 @@
           }
         }
       }
+    },
+    "/users/edit": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User edit",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "requestBody": {
+          "description": "User object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserEditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/users/logout": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User logout",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/notices/title": {
+      "get": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Search ads by title",
+        "parameters": [],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/notices/category": {
+      "get": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Receive ads by category",
+        "parameters": [],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/notices/{noticeId}": {
+      "get": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Receive one ad by id",
+        "parameters": [
+          {
+            "name": "noticeId",
+            "in": "path",
+            "description": "notice id string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/notices/selected": {
+      "post": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Add the ad to favorites",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Receive ads added to favorites",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/notices/selected/{noticeId}": {
+      "delete": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Delete the ad from favorites",
+        "parameters": [
+          {
+            "name": "noticeId",
+            "in": "path",
+            "description": "notice id string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/notices/user": {
+      "post": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Add ads to a category",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Receive all users ads",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/notices/user/{noticeId}": {
+      "delete": {
+        "tags": [
+          "Notices"
+        ],
+        "summary": "Delete the ad by id",
+        "parameters": [
+          {
+            "name": "noticeId",
+            "in": "path",
+            "description": "notice id string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/pets": {
+      "post": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Add user's pet",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/pets/{petId}": {
+      "delete": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Delete user's pet",
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "pet id string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/servicesSidebar": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get contact information about services that provide services",
+        "parameters": [],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/news": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get all news",
+        "parameters": [],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
+    },
+    "/userAndPets": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get personal information about the user, and information about the user's pets.",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK \"Successful operation\""
+          }
+        }
+      }
     }
   },
   "components": {
@@ -239,6 +581,28 @@
             "type": "string",
             "description": "User's password",
             "example": "qwerty123"
+          }
+        }
+      },
+      "UserEditRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "birthdate": {
+            "type": "string"
+          },
+          "mobilePhone": {
+            "type": "string"
+          },
+          "cityRegion": {
+            "type": "string"
           }
         }
       }
