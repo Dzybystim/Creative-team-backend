@@ -31,11 +31,9 @@ async function login(req, res) {
 
   // return token
   res.json({
-    status: "success",
-    code: 200,
     data: {
       token: user.accessToken,
-      user: user.name,
+      user: user.email,
     },
   });
 }

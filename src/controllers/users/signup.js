@@ -21,10 +21,8 @@ async function signup(req, res) {
   newUser.setPassword(password);
   await newUser.save();
 
-  return res.json({
-    status: "created",
-    code: 201,
-    data: { email: newUser.email },
+  return res.status(201).json({
+    user: { email: newUser.email },
   });
 }
 
