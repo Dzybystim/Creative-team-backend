@@ -2,9 +2,9 @@ const { Notice } = require("../../schemas/notice");
 
 async function getNoticesByCategory(req, res) {
   try {
-    const { category } = req.params;
+    const query = req.query.category;
 
-    const result = await Notice.find({ category });
+    const result = await Notice.find({ category: query });
 
     if (!result || result.length === 0) {
       return res.json({ message: "Not found" });

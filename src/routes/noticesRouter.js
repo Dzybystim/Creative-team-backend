@@ -5,7 +5,7 @@ const { authMiddleware } = require("../middlewares/auth");
 const router = express.Router();
 
 router.get("/title", noticeController.searchByTitle);
-router.get("/:category", noticeController.getNoticesByCategory);
+router.get("/category", noticeController.getNoticesByCategory);
 router.get("/:noticeId", noticeController.getNotice);
 router.post("/selected", authMiddleware, noticeController.addSelected);
 router.get("/selected", authMiddleware, noticeController.getSelected);
