@@ -1,5 +1,11 @@
+const { User } = require("../../schemas/user");
+
 async function edit(req, res) {
-  return res.status(504).json({ message: "edit not implemented" });
+  const newData = req.body;
+  const { id } = req.user;
+  await User.findByIdAndUpdate(id, newData);
+
+  res.status(200).json({ message: "Updated successfully" });
 }
 
 module.exports = edit;
