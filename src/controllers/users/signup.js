@@ -1,6 +1,10 @@
 const { User } = require("../../schemas/user");
+const { userJoiValidation } = require("../../services");
 
 async function signup(req, res) {
+  // joi validation
+  userJoiValidation(req.body);
+
   const { email, password } = req.body;
   console.log(email);
   // get and verify data
