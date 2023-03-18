@@ -6,7 +6,7 @@ async function news(req, res, next) {
   try {
     const data = await fs.readFile(newPath);
     const result = JSON.parse(data);
-    return res.status(200).json({ code: 200, status: "success", result });
+    return res.status(200).json(result);
   } catch (error) {
     next(error);
   }
