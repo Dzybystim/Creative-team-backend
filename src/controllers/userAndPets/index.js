@@ -6,6 +6,7 @@ async function userAndPets(req, res) {
 
   const user = await User.findById(id).select({
     _id: 0,
+    email: 1,
     name: 1,
     cityRegion: 1,
     mobilePhone: 1,
