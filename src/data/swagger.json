@@ -429,9 +429,41 @@
             "Bearer": []
           }
         ],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePetRequest"
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {
-            "description": "OK \"Successful operation\""
+          "201": {
+            "description": "Created \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "201",
+                  "type": "object",
+                  "properties": {
+                    "pet": {
+                      "type": "object",
+                      "example": {
+                        "_id": "petId",
+                        "name": "user's pet name",
+                        "date": "birthdate",
+                        "breed": "breed",
+                        "comments": "comments",
+                        "photoURL": "url to image"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -460,7 +492,18 @@
         ],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "example": {
+                    "message": "pet was removed"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -574,7 +617,39 @@
         ],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\" (object and array of objects)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "example": {
+                        "email": "user email",
+                        "cityRegion": "address",
+                        "mobilePhone": "phone number",
+                        "birthdate": "birthdate",
+                        "photoURL": "url to image",
+                        "name": "user name"
+                      }
+                    },
+                    "pets": {
+                      "example": [
+                        {
+                          "_id": "petId",
+                          "date": "birthdate",
+                          "breed": "breed",
+                          "comments": "comments",
+                          "photoURL": "url to image",
+                          "name": "pet name"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -668,6 +743,26 @@
             "type": "string"
           },
           "cityRegion": {
+            "type": "string"
+          },
+          "photoURL": {
+            "type": "string"
+          }
+        }
+      },
+      "CreatePetRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "breed": {
+            "type": "string"
+          },
+          "comments": {
             "type": "string"
           },
           "photoURL": {
