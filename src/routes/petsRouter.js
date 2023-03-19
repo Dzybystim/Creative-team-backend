@@ -5,11 +5,7 @@ const asyncHandler = require("express-async-handler");
 
 const router = express.Router();
 
-router.post("/pet/", authMiddleware, asyncHandler(petController.addPet));
-router.delete(
-  "/pet/:petId",
-  authMiddleware,
-  asyncHandler(petController.deletePet)
-);
+router.post("/", authMiddleware, asyncHandler(petController.addPet));
+router.delete("/:petId", authMiddleware, asyncHandler(petController.deletePet));
 
 module.exports = router;
