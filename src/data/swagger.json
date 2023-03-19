@@ -1,19 +1,16 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "0.0.1",
+    "version": "0.0.2",
     "title": "Petly API 1.0",
-    "description": "Creative team 7 back-end API",
-    "contact": {
-      "email": "petly@petly.com"
-    }
+    "description": "Creative team 7 back-end API"
   },
   "servers": [
     {
-      "url": "https://backend.petly.com"
+      "url": "https://backend.petly.club"
     },
     {
-      "url": "http://backend.petly.com"
+      "url": "http://backend.petly.club"
     },
     {
       "url": "http://localhost:3000"
@@ -580,7 +577,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "fileName": {
+                  "avatar": {
                     "type": "string",
                     "format": "binary"
                   }
@@ -591,7 +588,22 @@
         },
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "urlAvatar": {
+                      "type": "string",
+                      "description": "description",
+                      "example": "url"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
