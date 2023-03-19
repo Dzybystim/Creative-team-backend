@@ -10,6 +10,11 @@ const router = express.Router();
 router.get("/servicesSidebar", servicesSidebarController.servicesSidebar);
 router.get("/news", newsController.news);
 router.get("/userAndPets", authMiddleware, userAndPetsController.userAndPets);
-router.post("/uploadAvatar", uploadMiddleware.single("avatar"), urlToAvatar);
+router.post(
+  "/uploadAvatar",
+  authMiddleware,
+  uploadMiddleware.single("avatar"),
+  urlToAvatar
+);
 
 module.exports = router;
