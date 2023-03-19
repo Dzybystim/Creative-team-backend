@@ -1,3 +1,4 @@
 const userJoiValidation = require("./userJoiValidation");
+const petJoiValidation = require("./petJoiValidation");
 
-module.exports = { userJoiValidation };
+module.exports = { userJoiValidation, petJoiValidation };
