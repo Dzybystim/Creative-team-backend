@@ -31,7 +31,6 @@ const userSchema = mongoose.Schema(
     },
     photoURL: String,
     selected: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
-    pets: [{ type: mongoose.Schema.Types.ObjectId, ref: "pet" }],
     notices: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
     accessToken: {
       type: String,
