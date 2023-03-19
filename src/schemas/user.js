@@ -38,7 +38,6 @@ const userSchema = mongoose.Schema(
       default: null,
     },
     selected: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
-    pets: [{ type: mongoose.Schema.Types.ObjectId, ref: "pet" }],
     notices: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
     accessToken: {
       type: String,
