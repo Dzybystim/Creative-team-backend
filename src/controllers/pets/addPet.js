@@ -9,7 +9,7 @@ async function addPet(req, res) {
   const usersPet = await Pet.create({ ...req.body, owner: id });
 
   return res.status(201).json({
-    pet: { name: usersPet.name, owner: usersPet.owner },
+    pet: usersPet,
   });
 }
 
