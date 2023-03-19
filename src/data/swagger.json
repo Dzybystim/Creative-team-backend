@@ -67,7 +67,7 @@
                       "type": "object",
                       "description": "description",
                       "example": {
-                        "email": "userEmail"
+                        "email": "user@email.com"
                       }
                     }
                   }
@@ -76,51 +76,20 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "Bad Request (one of the \"message\")",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "400",
                   "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "Invalid value of email or password"
+                  "example": [
+                    {
+                      "message": "Please, provide all required fiields"
+                    },
+                    {
+                      "message": "Email in use"
                     }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "409",
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "Email in use"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "500",
-                  "type": "object",
-                  "example": {
-                    "message": "error description"
-                  }
+                  ]
                 }
               }
             }
@@ -156,21 +125,10 @@
                   "title": "200",
                   "type": "object",
                   "properties": {
-                    "accessToken": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "token"
-                    },
-                    "refreshToken": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "token"
-                    },
-                    "user": {
-                      "type": "object",
-                      "description": "description",
+                    "data": {
                       "example": {
-                        "email": "userEmail"
+                        "token": "token",
+                        "user": "user@email.com"
                       }
                     }
                   }
@@ -179,47 +137,33 @@
             }
           },
           "400": {
-            "description": "Bad Request \"validate error\"",
+            "description": "Bad Request (one of the \"message\")",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "400",
                   "type": "object",
-                  "example": {
-                    "message": "Wrong email or password"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized (one of the \"message\")",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "401",
-                  "type": "object",
                   "example": [
                     {
-                      "message": "Email or password is wrong"
+                      "message": "Please, provide all required fields"
                     },
                     {
-                      "message": "Your Email is not verifyied!"
+                      "message": "Unable to set token"
                     }
                   ]
                 }
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "500",
+                  "title": "401",
                   "type": "object",
                   "example": {
-                    "message": "error description"
+                    "message": "Email or password is wrong"
                   }
                 }
               }
@@ -253,7 +197,18 @@
         },
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "example": {
+                    "message": "Updated successfully"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -520,7 +475,50 @@
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\" (array of objects)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "example": "text title"
+                    },
+                    "url": {
+                      "example": "url to site"
+                    },
+                    "addressUrl": {
+                      "example": "url to maps"
+                    },
+                    "imageUrl": {
+                      "example": "url to image"
+                    },
+                    "address": {
+                      "example": "text address"
+                    },
+                    "workDays": {
+                      "example": [
+                        {
+                          "isOpen": false
+                        },
+                        {
+                          "isOpen": true,
+                          "from": "11:00",
+                          "to": "16:00"
+                        }
+                      ]
+                    },
+                    "phone": {
+                      "example": "phone number"
+                    },
+                    "email": {
+                      "example": "email"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -535,7 +533,29 @@
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\" (array of objects)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "example": "text title"
+                    },
+                    "url": {
+                      "example": "url to news"
+                    },
+                    "description": {
+                      "example": "text body"
+                    },
+                    "date": {
+                      "example": "2022-08-12T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -648,6 +668,9 @@
             "type": "string"
           },
           "cityRegion": {
+            "type": "string"
+          },
+          "photoURL": {
             "type": "string"
           }
         }
