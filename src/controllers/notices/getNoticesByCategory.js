@@ -7,12 +7,14 @@ async function getNoticesByCategory(req, res) {
     const result = await Notice.find({ category: query });
 
     if (!result || result.length === 0) {
-      return res.json({ message: "Not found" });
+      res.status(404);
+      throw new Error("Not found!");
     }
 
     res.json(result);
   } catch (error) {
-    res.status(500).json({ message: error.codeName });
+    res.status(500);
+    throw new Error(error);
   }
 }
 

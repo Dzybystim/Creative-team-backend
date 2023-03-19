@@ -9,14 +9,14 @@ async function searchByTitle(req, res) {
     });
 
     if (searchResult.length === 0) {
-      return res.json({
-        message: "We did not find any notices for your request",
-      });
+      res.status(404);
+      throw new Error("We did not find any notices for your request");
     }
 
     res.json(searchResult);
   } catch (error) {
-    res.status(500).json({ message: error.codeName });
+    res.status(500);
+    throw new Error(error);
   }
 }
 

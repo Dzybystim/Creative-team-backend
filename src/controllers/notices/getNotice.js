@@ -7,12 +7,14 @@ async function getNotice(req, res) {
     const result = await Notice.findById(noticeId);
 
     if (!result) {
-      return res.json({ message: "Not found!" });
+      res.status(404);
+      throw new Error("Not found!");
     }
 
     res.json(result);
   } catch (error) {
-    res.status(500).json({ message: error.codeName });
+    res.status(500);
+    throw new Error(error);
   }
 }
 
