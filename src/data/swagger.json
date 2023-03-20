@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "0.0.3",
+    "version": "0.0.5",
     "title": "Petly API 1.0",
     "description": "Creative team 7 back-end API"
   },
@@ -238,11 +238,29 @@
           "Notices"
         ],
         "summary": "Search ads by title",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Search by title",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "cat"
+            }
+          }
+        ],
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeResponses"
+                }
+              }
+            }
           }
         }
       }
@@ -253,11 +271,29 @@
           "Notices"
         ],
         "summary": "Receive ads by category",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Сategory \"sell\" or \"lost-found\" or \"for-free\"",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "sell"
+            }
+          }
+        ],
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeResponses"
+                }
+              }
+            }
           }
         }
       }
@@ -579,7 +615,17 @@
           "Other"
         ],
         "summary": "Get all news",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by title",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "security": [],
         "responses": {
           "200": {
@@ -590,6 +636,9 @@
                   "title": "200",
                   "type": "object",
                   "properties": {
+                    "_id": {
+                      "example": "63f8635ce9466b36765fbf24"
+                    },
                     "title": {
                       "example": "text title"
                     },
@@ -767,16 +816,21 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "example": "Petly"
           },
           "date": {
-            "type": "string"
+            "type": "string",
+            "description": "date",
+            "example": "2022-08-12T00:00:00.000Z"
           },
           "breed": {
-            "type": "string"
+            "type": "string",
+            "example": "husky"
           },
           "comments": {
-            "type": "string"
+            "type": "string",
+            "example": "good dog"
           },
           "photoURL": {
             "type": "string"
