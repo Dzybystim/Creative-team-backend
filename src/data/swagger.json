@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "0.0.2",
+    "version": "0.0.5",
     "title": "Petly API 1.0",
     "description": "Creative team 7 back-end API"
   },
@@ -238,11 +238,29 @@
           "Notices"
         ],
         "summary": "Search ads by title",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Search by title",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "cat"
+            }
+          }
+        ],
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeResponses"
+                }
+              }
+            }
           }
         }
       }
@@ -253,11 +271,29 @@
           "Notices"
         ],
         "summary": "Receive ads by category",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Сategory \"sell\" or \"lost-found\" or \"for-free\"",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "sell"
+            }
+          }
+        ],
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeResponses"
+                }
+              }
+            }
           }
         }
       }
@@ -282,7 +318,14 @@
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeResponses"
+                }
+              }
+            }
           }
         }
       }
@@ -572,7 +615,17 @@
           "Other"
         ],
         "summary": "Get all news",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by title",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "security": [],
         "responses": {
           "200": {
@@ -583,6 +636,9 @@
                   "title": "200",
                   "type": "object",
                   "properties": {
+                    "_id": {
+                      "example": "63f8635ce9466b36765fbf24"
+                    },
                     "title": {
                       "example": "text title"
                     },
@@ -729,7 +785,8 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "example": "Petly"
           },
           "email": {
             "type": "string",
@@ -737,16 +794,21 @@
             "format": "email"
           },
           "birthdate": {
-            "type": "string"
+            "type": "string",
+            "description": "date",
+            "example": "2002-08-12T00:00:00.000Z"
           },
           "mobilePhone": {
-            "type": "string"
+            "type": "string",
+            "example": "+380991234567"
           },
           "cityRegion": {
-            "type": "string"
+            "type": "string",
+            "example": "address"
           },
           "photoURL": {
-            "type": "string"
+            "type": "string",
+            "example": "url photo"
           }
         }
       },
@@ -754,19 +816,74 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "example": "Petly"
           },
           "date": {
+            "type": "string",
+            "description": "date",
+            "example": "2022-08-12T00:00:00.000Z"
+          },
+          "breed": {
+            "type": "string",
+            "example": "husky"
+          },
+          "comments": {
+            "type": "string",
+            "example": "good dog"
+          },
+          "photoURL": {
             "type": "string"
+          }
+        }
+      },
+      "NoticeResponses": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Notice`s id",
+            "example": "63f8635ce9466b36765fbf24"
+          },
+          "category": {
+            "type": "string",
+            "description": "type of category",
+            "example": "sell"
+          },
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "pet's name"
+          },
+          "birthdate": {
+            "type": "string",
+            "description": "date",
+            "example": "2022-08-12T00:00:00.000Z"
           },
           "breed": {
             "type": "string"
           },
+          "sex": {
+            "type": "string",
+            "description": "male or female",
+            "example": "male"
+          },
+          "location": {
+            "type": "string",
+            "example": "address"
+          },
           "comments": {
             "type": "string"
           },
-          "photoURL": {
-            "type": "string"
+          "price": {
+            "type": "string",
+            "example": 100
+          },
+          "imageURL": {
+            "type": "string",
+            "example": "url photo"
           }
         }
       }
