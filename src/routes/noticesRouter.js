@@ -4,6 +4,7 @@ const { authMiddleware } = require("../middlewares/auth");
 
 const router = express.Router();
 
+router.get("/user", authMiddleware, noticeController.getUserNotices);
 router.get("/title", noticeController.searchByTitle);
 router.get("/category", noticeController.getNoticesByCategory);
 router.get("/:noticeId", noticeController.getNotice);
@@ -15,7 +16,6 @@ router.delete(
   noticeController.deleteSelected
 );
 router.post("/user", authMiddleware, noticeController.addUserNotice);
-router.get("/user", authMiddleware, noticeController.getUserNotices);
 router.delete(
   "/user/:noticeId",
   authMiddleware,
