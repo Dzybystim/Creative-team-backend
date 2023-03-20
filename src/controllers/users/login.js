@@ -1,11 +1,15 @@
 const { User } = require("../../schemas/user");
 const jwt = require("jsonwebtoken");
 const { SECRET } = process.env;
-const { userJoiValidation } = require("../../services");
+const { authSchema } = require("../../schemas/joiValidation");
 
 async function login(req, res) {
   // joi validation
-  userJoiValidation(req.body);
+  const { error } = authSchema.validate(req.body);
+  if (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
 
   // get and verify data
   const { email, password } = req.body;

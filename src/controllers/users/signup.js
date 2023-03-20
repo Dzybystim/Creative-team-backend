@@ -1,5 +1,7 @@
 const { User } = require("../../schemas/user");
 const { authSchema } = require("../../schemas/joiValidation");
+const jwt = require("jsonwebtoken");
+const { SECRET } = process.env;
 
 async function signup(req, res) {
   // joi validation
@@ -27,10 +29,23 @@ async function signup(req, res) {
   // if not - hash password and create user
   const newUser = await User.create({ ...req.body });
   newUser.setPassword(password);
-  await newUser.save();
+
+  // generate token
+  const payload = { id: newUser.id };
+  const token = jwt.sign(payload, SECRET, { expiresIn: "12h" });
+
+  // write token to user
+  newUser.accessToken = token;
+
+  const updated = await newUser.save();
+  if (!updated) {
+    res.status(400);
+    throw new Error("Unable create user");
+  }
 
   return res.status(201).json({
-    user: { email: newUser.email },
+    token: newUser.accessToken,
+    user: newUser.email,
   });
 }
 
