@@ -1,9 +1,13 @@
 const { User } = require("../../schemas/user");
-const { userJoiValidation } = require("../../services");
+const { authSchema } = require("../../schemas/joiValidation");
 
 async function signup(req, res) {
   // joi validation
-  userJoiValidation(req.body);
+  const { error } = authSchema.validate(req.body);
+  if (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
 
   const { email, password } = req.body;
   console.log(email);
