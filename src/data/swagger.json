@@ -1,19 +1,16 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "0.0.1",
+    "version": "0.0.2",
     "title": "Petly API 1.0",
-    "description": "Creative team 7 back-end API",
-    "contact": {
-      "email": "petly@petly.com"
-    }
+    "description": "Creative team 7 back-end API"
   },
   "servers": [
     {
-      "url": "https://backend.petly.com"
+      "url": "https://backend.petly.club"
     },
     {
-      "url": "http://backend.petly.com"
+      "url": "http://backend.petly.club"
     },
     {
       "url": "http://localhost:3000"
@@ -40,9 +37,7 @@
   "paths": {
     "/users/signup": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User registration",
         "parameters": [],
         "security": [],
@@ -70,7 +65,7 @@
                       "type": "object",
                       "description": "description",
                       "example": {
-                        "email": "userEmail"
+                        "email": "user@email.com"
                       }
                     }
                   }
@@ -79,51 +74,20 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "Bad Request (one of the \"message\")",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "400",
                   "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "Invalid value of email or password"
+                  "example": [
+                    {
+                      "message": "Please, provide all required fiields"
+                    },
+                    {
+                      "message": "Email in use"
                     }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "409",
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "Email in use"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "500",
-                  "type": "object",
-                  "example": {
-                    "message": "error description"
-                  }
+                  ]
                 }
               }
             }
@@ -133,9 +97,7 @@
     },
     "/users/login": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User login",
         "parameters": [],
         "security": [],
@@ -159,21 +121,10 @@
                   "title": "200",
                   "type": "object",
                   "properties": {
-                    "accessToken": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "token"
-                    },
-                    "refreshToken": {
-                      "type": "string",
-                      "description": "description",
-                      "example": "token"
-                    },
-                    "user": {
-                      "type": "object",
-                      "description": "description",
+                    "data": {
                       "example": {
-                        "email": "userEmail"
+                        "token": "token",
+                        "user": "user@email.com"
                       }
                     }
                   }
@@ -182,47 +133,33 @@
             }
           },
           "400": {
-            "description": "Bad Request \"validate error\"",
+            "description": "Bad Request (one of the \"message\")",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "400",
                   "type": "object",
-                  "example": {
-                    "message": "Wrong email or password"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized (one of the \"message\")",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "401",
-                  "type": "object",
                   "example": [
                     {
-                      "message": "Email or password is wrong"
+                      "message": "Please, provide all required fields"
                     },
                     {
-                      "message": "Your Email is not verifyied!"
+                      "message": "Unable to set token"
                     }
                   ]
                 }
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "500",
+                  "title": "401",
                   "type": "object",
                   "example": {
-                    "message": "error description"
+                    "message": "Email or password is wrong"
                   }
                 }
               }
@@ -233,9 +170,7 @@
     },
     "/users/edit": {
       "patch": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User edit",
         "parameters": [],
         "security": [
@@ -256,16 +191,25 @@
         },
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "example": {
+                    "message": "Updated successfully"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/users/logout": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User logout",
         "parameters": [],
         "security": [
@@ -282,9 +226,7 @@
     },
     "/notices/title": {
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Search ads by title",
         "parameters": [],
         "security": [],
@@ -297,9 +239,7 @@
     },
     "/notices/category": {
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive ads by category",
         "parameters": [],
         "security": [],
@@ -312,9 +252,7 @@
     },
     "/notices/{noticeId}": {
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive one ad by id",
         "parameters": [
           {
@@ -337,9 +275,7 @@
     },
     "/notices/selected": {
       "post": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Add the ad to favorites",
         "parameters": [],
         "security": [
@@ -354,9 +290,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive ads added to favorites",
         "parameters": [],
         "security": [
@@ -373,9 +307,7 @@
     },
     "/notices/selected/{noticeId}": {
       "delete": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Delete the ad from favorites",
         "parameters": [
           {
@@ -402,9 +334,7 @@
     },
     "/notices/user": {
       "post": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Add ads to a category",
         "parameters": [],
         "security": [
@@ -419,9 +349,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive all users ads",
         "parameters": [],
         "security": [
@@ -438,9 +366,7 @@
     },
     "/notices/user/{noticeId}": {
       "delete": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Delete the ad by id",
         "parameters": [
           {
@@ -467,9 +393,7 @@
     },
     "/pets": {
       "post": {
-        "tags": [
-          "Pets"
-        ],
+        "tags": ["Pets"],
         "summary": "Add user's pet",
         "parameters": [],
         "security": [
@@ -477,18 +401,48 @@
             "Bearer": []
           }
         ],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePetRequest"
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {
-            "description": "OK \"Successful operation\""
+          "201": {
+            "description": "Created \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "201",
+                  "type": "object",
+                  "properties": {
+                    "pet": {
+                      "type": "object",
+                      "example": {
+                        "_id": "petId",
+                        "name": "user's pet name",
+                        "date": "birthdate",
+                        "breed": "breed",
+                        "comments": "comments",
+                        "photoURL": "url to image"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/pets/{petId}": {
       "delete": {
-        "tags": [
-          "Pets"
-        ],
+        "tags": ["Pets"],
         "summary": "Delete user's pet",
         "parameters": [
           {
@@ -508,46 +462,116 @@
         ],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "example": {
+                    "message": "pet was removed"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/servicesSidebar": {
       "get": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Get contact information about services that provide services",
         "parameters": [],
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\" (array of objects)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "example": "text title"
+                    },
+                    "url": {
+                      "example": "url to site"
+                    },
+                    "addressUrl": {
+                      "example": "url to maps"
+                    },
+                    "imageUrl": {
+                      "example": "url to image"
+                    },
+                    "address": {
+                      "example": "text address"
+                    },
+                    "workDays": {
+                      "example": [
+                        {
+                          "isOpen": false
+                        },
+                        {
+                          "isOpen": true,
+                          "from": "11:00",
+                          "to": "16:00"
+                        }
+                      ]
+                    },
+                    "phone": {
+                      "example": "phone number"
+                    },
+                    "email": {
+                      "example": "email"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/news": {
       "get": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Get all news",
         "parameters": [],
         "security": [],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\" (array of objects)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "example": "text title"
+                    },
+                    "url": {
+                      "example": "url to news"
+                    },
+                    "description": {
+                      "example": "text body"
+                    },
+                    "date": {
+                      "example": "2022-08-12T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/userAndPets": {
       "get": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Get personal information about the user, and information about the user's pets",
         "parameters": [],
         "security": [
@@ -557,16 +581,46 @@
         ],
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\" (object and array of objects)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "example": {
+                        "email": "user email",
+                        "cityRegion": "address",
+                        "mobilePhone": "phone number",
+                        "birthdate": "birthdate",
+                        "photoURL": "url to image",
+                        "name": "user name"
+                      }
+                    },
+                    "pets": {
+                      "example": [
+                        {
+                          "_id": "petId",
+                          "date": "birthdate",
+                          "breed": "breed",
+                          "comments": "comments",
+                          "photoURL": "url to image",
+                          "name": "pet name"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/uploadAvatar": {
       "post": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Upload a picture/photo/avatar and get a link to it",
         "parameters": [],
         "security": [
@@ -580,7 +634,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "fileName": {
+                  "avatar": {
                     "type": "string",
                     "format": "binary"
                   }
@@ -591,7 +645,22 @@
         },
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "200",
+                  "type": "object",
+                  "properties": {
+                    "urlAvatar": {
+                      "type": "string",
+                      "description": "description",
+                      "example": "url"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -601,10 +670,7 @@
     "schemas": {
       "SignupAndLoginRequest": {
         "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "type": "string",
@@ -636,6 +702,29 @@
             "type": "string"
           },
           "cityRegion": {
+            "type": "string"
+          },
+          "photoURL": {
+            "type": "string"
+          }
+        }
+      },
+      "CreatePetRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "breed": {
+            "type": "string"
+          },
+          "comments": {
+            "type": "string"
+          },
+          "photoURL": {
             "type": "string"
           }
         }

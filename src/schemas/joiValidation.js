@@ -19,7 +19,18 @@ const searchByTitleSchema = Joi.object({
   title: Joi.string().min(2).max(48),
 });
 
+// Pets
+const petsSchema = Joi.object({
+  name: Joi.string(),
+  date: Joi.date(),
+  breed: Joi.string(),
+  comments: Joi.string(),
+  photoURL: Joi.string(),
+  owner: Joi.string(),
+});
+
 module.exports = {
   authSchema,
   searchByTitleSchema,
+  petsSchema,
 };

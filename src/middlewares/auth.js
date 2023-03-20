@@ -17,12 +17,20 @@ const authMiddleware = async (req, res, next) => {
     // verify token
     const { id } = jwt.verify(token, SECRET);
 
-    // find user and send data next()
-    const user = await User.findById(id).select("email");
+    // find user
+    const user = await User.findById(id).select("email, accessToken");
+
+    // if user's token doesn't match bearer token return error
+    if (user.accessToken !== token) {
+      res.status(401);
+      throw new Error("Unauthorized");
+    }
+
+    // send data next()
     req.user = user;
     next();
   } catch (err) {
-    res.status(401).json({ message: "Not authorized" });
+    res.status(401).json({ message: "Unauthorized" });
   }
 };
 

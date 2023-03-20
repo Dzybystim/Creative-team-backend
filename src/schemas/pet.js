@@ -8,20 +8,27 @@ const petSchema = mongoose.Schema(
   {
     name: {
       type: String,
+      default: null,
     },
     date: {
       type: Date,
+      default: null,
     },
     breed: {
       type: String,
+      default: null,
     },
     comments: {
       type: String,
+      default: null,
     },
-    photoURL: String,
+    photoURL: {
+      type: String,
+      default: null,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "users",
     },
   },
   {

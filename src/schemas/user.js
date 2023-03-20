@@ -19,19 +19,25 @@ const userSchema = mongoose.Schema(
     },
     name: {
       type: String,
+      default: null,
     },
     cityRegion: {
       type: String,
+      default: null,
     },
     mobilePhone: {
       type: String,
+      default: null,
     },
     birthdate: {
       type: Date,
+      default: null,
     },
-    photoURL: String,
+    photoURL: {
+      type: String,
+      default: null,
+    },
     selected: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
-    pets: [{ type: mongoose.Schema.Types.ObjectId, ref: "pet" }],
     notices: [{ type: mongoose.Schema.Types.ObjectId, ref: "notice" }],
     accessToken: {
       type: String,
