@@ -1,30 +1,21 @@
 const express = require("express");
 const { noticeController } = require("../controllers");
 const { authMiddleware } = require("../middlewares/auth");
-const asyncHadler = require("express-async-handler");
 
 const router = express.Router();
 
-router.get("/title", asyncHadler(noticeController.searchByTitle)); // Ready
-router.get("/category", asyncHadler(noticeController.getNoticesByCategory)); // Ready
-router.get("/:noticeId", asyncHadler(noticeController.getNotice)); // Ready
-router.post(
-  "/selected/:selectedId",
-  authMiddleware,
-  asyncHadler(noticeController.addSelected)
-); // Ready
-router.get(
-  "/selected/selected",
-  authMiddleware,
-  asyncHadler(noticeController.getSelected)
-); // Ready
+router.get("/user", authMiddleware, noticeController.getUserNotices);
+router.get("/title", noticeController.searchByTitle);
+router.get("/category", noticeController.getNoticesByCategory);
+router.get("/:noticeId", noticeController.getNotice);
+router.post("/selected", authMiddleware, noticeController.addSelected);
+router.get("/selected", authMiddleware, noticeController.getSelected);
 router.delete(
-  "/selected/ddd/:selectedId",
+  "/selected/:noticeId",
   authMiddleware,
-  asyncHadler(noticeController.deleteSelected)
-); // Ready
-router.post("/user", authMiddleware, noticeController.addUserNotice); // TODO
-router.get("/user", authMiddleware, noticeController.getUserNotices); // TODO
+  noticeController.deleteSelected
+);
+router.post("/user", authMiddleware, noticeController.addUserNotice);
 router.delete(
   "/user/:noticeId",
   authMiddleware,
