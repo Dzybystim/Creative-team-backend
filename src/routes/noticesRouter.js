@@ -1,29 +1,42 @@
 const express = require("express");
 const { noticeController } = require("../controllers");
 const { authMiddleware } = require("../middlewares/auth");
+const asyncHandler = require("express-async-handler");
 
 const router = express.Router();
 
-router.get("/user", authMiddleware, noticeController.getUserNotices);
-router.get("/title", noticeController.searchByTitle);
-router.get("/category", noticeController.getNoticesByCategory);
-router.get("/:noticeId", noticeController.getNotice);
+router.get(
+  "/user",
+  authMiddleware,
+  asyncHandler(noticeController.getUserNotices)
+);
+router.get(
+  "/selected",
+  authMiddleware,
+  asyncHandler(noticeController.getSelected)
+);
+router.get("/title", asyncHandler(noticeController.searchByTitle));
+router.get("/category", asyncHandler(noticeController.getNoticesByCategory));
+router.get("/:noticeId", asyncHandler(noticeController.getNotice));
+router.post(
+  "/user",
+  authMiddleware,
+  asyncHandler(noticeController.addUserNotice)
+);
 router.post(
   "/selected/:noticeId",
   authMiddleware,
-  noticeController.addSelected
+  asyncHandler(noticeController.addSelected)
 );
-router.get("/selected/notice", authMiddleware, noticeController.getSelected);
 router.delete(
   "/selected/:noticeId",
   authMiddleware,
-  noticeController.deleteSelected
+  asyncHandler(noticeController.deleteSelected)
 );
-router.post("/user", authMiddleware, noticeController.addUserNotice);
 router.delete(
   "/user/:noticeId",
   authMiddleware,
-  noticeController.deleteUserNotice
-); // TODO
+  asyncHandler(noticeController.deleteUserNotice)
+);
 
 module.exports = router;

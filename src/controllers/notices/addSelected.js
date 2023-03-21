@@ -6,11 +6,12 @@ async function addSelected(req, res) {
     const { noticeId } = req.params;
     const { _id: owner } = req.user;
 
-    const findNotice = await Notice.findByIdAndUpdate(
-      noticeId,
-      { $set: { owner } },
-      { new: true }
-    );
+    const findNotice = await Notice.findById(noticeId);
+
+    if (!findNotice) {
+      res.status(404);
+      throw new Error("Not found notice");
+    }
 
     await User.findByIdAndUpdate(owner, {
       $addToSet: { selected: findNotice },
