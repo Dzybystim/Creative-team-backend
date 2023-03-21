@@ -8,8 +8,12 @@ router.get("/user", authMiddleware, noticeController.getUserNotices);
 router.get("/title", noticeController.searchByTitle);
 router.get("/category", noticeController.getNoticesByCategory);
 router.get("/:noticeId", noticeController.getNotice);
-router.post("/selected", authMiddleware, noticeController.addSelected);
-router.get("/selected", authMiddleware, noticeController.getSelected);
+router.post(
+  "/selected/:noticeId",
+  authMiddleware,
+  noticeController.addSelected
+);
+router.get("/selected/notice", authMiddleware, noticeController.getSelected);
 router.delete(
   "/selected/:noticeId",
   authMiddleware,
@@ -20,6 +24,6 @@ router.delete(
   "/user/:noticeId",
   authMiddleware,
   noticeController.deleteUserNotice
-);
+); // TODO
 
 module.exports = router;

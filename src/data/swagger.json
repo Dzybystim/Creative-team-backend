@@ -37,9 +37,7 @@
   "paths": {
     "/users/signup": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User registration",
         "parameters": [],
         "security": [],
@@ -99,9 +97,7 @@
     },
     "/users/login": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User login",
         "parameters": [],
         "security": [],
@@ -174,9 +170,7 @@
     },
     "/users/edit": {
       "patch": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User edit",
         "parameters": [],
         "security": [
@@ -215,9 +209,7 @@
     },
     "/users/logout": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User logout",
         "parameters": [],
         "security": [
@@ -234,9 +226,7 @@
     },
     "/notices/title": {
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Search ads by title",
         "parameters": [
           {
@@ -267,9 +257,7 @@
     },
     "/notices/category": {
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive ads by category",
         "parameters": [
           {
@@ -300,9 +288,7 @@
     },
     "/notices/{noticeId}": {
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive one ad by id",
         "parameters": [
           {
@@ -332,9 +318,7 @@
     },
     "/notices/selected": {
       "post": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Add the ad to favorites",
         "parameters": [],
         "security": [
@@ -349,9 +333,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive ads added to favorites",
         "parameters": [],
         "security": [
@@ -368,9 +350,7 @@
     },
     "/notices/selected/{noticeId}": {
       "delete": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Delete the ad from favorites",
         "parameters": [
           {
@@ -397,9 +377,7 @@
     },
     "/notices/user": {
       "post": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Add ads to a category",
         "parameters": [],
         "security": [
@@ -414,9 +392,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Receive all users ads",
         "parameters": [],
         "security": [
@@ -433,9 +409,7 @@
     },
     "/notices/user/{noticeId}": {
       "delete": {
-        "tags": [
-          "Notices"
-        ],
+        "tags": ["Notices"],
         "summary": "Delete the ad by id",
         "parameters": [
           {
@@ -462,9 +436,7 @@
     },
     "/pets": {
       "post": {
-        "tags": [
-          "Pets"
-        ],
+        "tags": ["Pets"],
         "summary": "Add user's pet",
         "parameters": [],
         "security": [
@@ -513,9 +485,7 @@
     },
     "/pets/{petId}": {
       "delete": {
-        "tags": [
-          "Pets"
-        ],
+        "tags": ["Pets"],
         "summary": "Delete user's pet",
         "parameters": [
           {
@@ -553,9 +523,7 @@
     },
     "/servicesSidebar": {
       "get": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Get contact information about services that provide services",
         "parameters": [],
         "security": [],
@@ -611,9 +579,7 @@
     },
     "/news": {
       "get": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Get all news",
         "parameters": [
           {
@@ -661,9 +627,7 @@
     },
     "/userAndPets": {
       "get": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Get personal information about the user, and information about the user's pets",
         "parameters": [],
         "security": [
@@ -712,9 +676,7 @@
     },
     "/uploadAvatar": {
       "post": {
-        "tags": [
-          "Other"
-        ],
+        "tags": ["Other"],
         "summary": "Upload a picture/photo/avatar and get a link to it",
         "parameters": [],
         "security": [
@@ -764,10 +726,7 @@
     "schemas": {
       "SignupAndLoginRequest": {
         "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "type": "string",
