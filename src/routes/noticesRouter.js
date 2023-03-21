@@ -8,10 +8,14 @@ router.get("/user", authMiddleware, noticeController.getUserNotices);
 router.get("/title", noticeController.searchByTitle);
 router.get("/category", noticeController.getNoticesByCategory);
 router.get("/:noticeId", noticeController.getNotice);
-router.post("/selected", authMiddleware, noticeController.addSelected);
-router.get("/selected", authMiddleware, noticeController.getSelected);
+router.post(
+  "/selected/:selectedId",
+  authMiddleware,
+  noticeController.addSelected
+);
+router.get("/selected/selected", authMiddleware, noticeController.getSelected);
 router.delete(
-  "/selected/:noticeId",
+  "/selected/:selectedId",
   authMiddleware,
   noticeController.deleteSelected
 );
