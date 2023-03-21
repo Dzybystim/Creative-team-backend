@@ -6,11 +6,6 @@ async function getNoticesByCategory(req, res) {
 
     const result = await Notice.find({ category: query });
 
-    if (!result || result.length === 0) {
-      res.status(404);
-      throw new Error("Not found!");
-    }
-
     res.json(result);
   } catch (error) {
     res.status(500);

@@ -9,16 +9,20 @@ router.get("/title", asyncHadler(noticeController.searchByTitle)); // Ready
 router.get("/category", asyncHadler(noticeController.getNoticesByCategory)); // Ready
 router.get("/:noticeId", asyncHadler(noticeController.getNotice)); // Ready
 router.post(
-  "/:selectedId",
+  "/selected/:selectedId",
   authMiddleware,
   asyncHadler(noticeController.addSelected)
 ); // Ready
-router.get("/selected", authMiddleware, noticeController.getSelected); // TODO
-router.delete(
-  "/selected/:noticeId",
+router.get(
+  "/selected/selected",
   authMiddleware,
-  noticeController.deleteSelected
-); // TODO
+  asyncHadler(noticeController.getSelected)
+); // Ready
+router.delete(
+  "/selected/ddd/:selectedId",
+  authMiddleware,
+  asyncHadler(noticeController.deleteSelected)
+); // Ready
 router.post("/user", authMiddleware, noticeController.addUserNotice); // TODO
 router.get("/user", authMiddleware, noticeController.getUserNotices); // TODO
 router.delete(
