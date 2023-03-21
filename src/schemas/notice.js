@@ -18,31 +18,42 @@ const noticeSchema = mongoose.Schema(
     },
     title: {
       type: String,
+      default: null,
     },
     name: {
       type: String,
+      default: null,
     },
     birthdate: {
       type: Date,
+      default: null,
     },
     breed: {
       type: String,
+      default: null,
     },
     sex: {
       type: String,
-      enum: ["male", "female"],
-      required: [true, "Sex is required"],
+      enum: ["male", "female", null],
+      // required: [true, "Sex is required"],
+      default: null,
     },
     location: {
       type: String,
+      default: null,
     },
     comments: {
       type: String,
+      default: null,
     },
     price: {
       type: Number,
+      default: null,
     },
-    imageURL: String,
+    imageURL: {
+      type: String,
+      default: null,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
