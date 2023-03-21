@@ -9,13 +9,13 @@ router.get("/title", noticeController.searchByTitle);
 router.get("/category", noticeController.getNoticesByCategory);
 router.get("/:noticeId", noticeController.getNotice);
 router.post(
-  "/selected/:selectedId",
+  "/selected/:noticeId",
   authMiddleware,
   noticeController.addSelected
 );
-router.get("/selected/selected", authMiddleware, noticeController.getSelected);
+router.get("/selected/notice", authMiddleware, noticeController.getSelected);
 router.delete(
-  "/selected/:selectedId",
+  "/selected/:noticeId",
   authMiddleware,
   noticeController.deleteSelected
 );

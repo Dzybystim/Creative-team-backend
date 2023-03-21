@@ -3,11 +3,11 @@ const { Notice } = require("../../schemas/notice");
 
 async function addSelected(req, res) {
   try {
-    const { selectedId } = req.params;
+    const { noticeId } = req.params;
     const { _id: owner } = req.user;
 
     const findNotice = await Notice.findByIdAndUpdate(
-      selectedId,
+      noticeId,
       { $set: { owner } },
       { new: true }
     );

@@ -3,12 +3,12 @@ const { User } = require("../../schemas/user");
 
 async function deleteSelected(req, res) {
   try {
-    const { selectedId } = req.params;
+    const { noticeId } = req.params;
     const { _id: owner } = req.user;
 
-    await User.updateOne({ _id: owner }, { $pull: { selected: selectedId } });
+    await User.updateOne({ _id: owner }, { $pull: { selected: noticeId } });
 
-    await Notice.updateOne({ _id: selectedId }, { $unset: { owner: "" } });
+    await Notice.updateOne({ _id: noticeId }, { $unset: { owner: "" } });
 
     res.json({
       message: "You have successfully deleted this notice from chosen ones",
