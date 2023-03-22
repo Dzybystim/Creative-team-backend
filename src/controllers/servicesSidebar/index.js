@@ -1,12 +1,9 @@
-const fs = require("fs/promises");
-const path = require("path");
-const newPath = path.resolve("src/data/sponsors.json");
+const { servicesSideBar } = require("../../schemas/sideBar");
 
 async function servicesSidebar(req, res, next) {
   try {
-    const data = await fs.readFile(newPath);
-    const result = JSON.parse(data);
-    return res.status(200).json(result);
+    const searchResult = await servicesSideBar.find({});
+    return res.status(200).json(searchResult);
   } catch (error) {
     next(error);
   }

@@ -2,22 +2,10 @@ const mongoose = require("mongoose");
 
 const newsSchema = mongoose.Schema(
   {
-    title: {
-      type: String,
-      default: null,
-    },
-    url: {
-      type: String,
-      default: null,
-    },
-    description: {
-      type: String,
-      default: null,
-    },
-    date: {
-      type: Date,
-      default: null,
-    },
+    title: { type: String, default: null },
+    url: { type: String, default: null },
+    description: { type: String, default: null },
+    date: { type: Date, default: null },
   },
   {
     timestamps: true,
