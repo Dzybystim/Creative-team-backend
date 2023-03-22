@@ -44,8 +44,7 @@ async function signup(req, res) {
   }
 
   return res.status(201).json({
-    token: newUser.accessToken,
-    user: newUser.email,
+    user: newUser,
   });
 }
 
