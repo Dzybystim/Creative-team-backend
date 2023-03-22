@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "0.0.6",
+    "version": "0.0.7",
     "title": "Petly API 1.0",
     "description": "Creative team 7 back-end API"
   },
@@ -49,7 +49,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SignupAndLoginRequest"
+                "$ref": "#/components/schemas/SignupRequest"
               }
             }
           }
@@ -60,17 +60,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "201",
-                  "type": "object",
-                  "properties": {
-                    "user": {
-                      "type": "object",
-                      "description": "description",
-                      "example": {
-                        "email": "user@email.com"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/SignupAndLoginResponses"
                 }
               }
             }
@@ -111,7 +101,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SignupAndLoginRequest"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           }
@@ -122,16 +112,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "200",
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "example": {
-                        "token": "token",
-                        "user": "user@email.com"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/SignupAndLoginResponses"
                 }
               }
             }
@@ -455,9 +436,27 @@
             "Bearer": []
           }
         ],
+        "requestBody": {
+          "description": "User object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoticeRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "OK \"Successful operation\""
+            "description": "OK \"Successful operation\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeResponses"
+                }
+              }
+            }
           }
         }
       }
@@ -793,7 +792,7 @@
   },
   "components": {
     "schemas": {
-      "SignupAndLoginRequest": {
+      "SignupRequest": {
         "type": "object",
         "required": [
           "email",
@@ -809,6 +808,53 @@
             "type": "string",
             "description": "User's password",
             "example": "qwerty123"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's Name",
+            "example": "Petya"
+          },
+          "cityRegion": {
+            "type": "string",
+            "example": "Settlement"
+          },
+          "mobilePhone": {
+            "type": "string",
+            "example": "+380991234567"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "SignupAndLoginResponses": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "example": {
+              "email": "user@email.com",
+              "name": "user's Name",
+              "cityRegion": "address",
+              "mobilePhone": "+380881234567",
+              "accessToken": "token"
+            }
           }
         }
       },
@@ -907,6 +953,58 @@
           },
           "comments": {
             "type": "string"
+          },
+          "price": {
+            "type": "string",
+            "example": 100
+          },
+          "imageURL": {
+            "type": "string",
+            "example": "url photo"
+          }
+        }
+      },
+      "NoticeRequest": {
+        "type": "object",
+        "required": [
+          "category",
+          "sex"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "type of category",
+            "example": "sell"
+          },
+          "title": {
+            "type": "string",
+            "example": "Notice's title"
+          },
+          "name": {
+            "type": "string",
+            "example": "pet's Name"
+          },
+          "birthdate": {
+            "type": "string",
+            "description": "birthdate",
+            "example": "2022-08-12T00:00:00.000Z"
+          },
+          "breed": {
+            "type": "string",
+            "example": "husky"
+          },
+          "sex": {
+            "type": "string",
+            "description": "male or female",
+            "example": "male"
+          },
+          "location": {
+            "type": "string",
+            "example": "address"
+          },
+          "comments": {
+            "type": "string",
+            "example": "text comments"
           },
           "price": {
             "type": "string",
