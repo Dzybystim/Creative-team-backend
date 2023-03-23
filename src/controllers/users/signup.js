@@ -1,18 +1,19 @@
 const { User } = require("../../schemas/user");
-const { authSchema } = require("../../schemas/joiValidation");
+const { userSchema } = require("../../schemas/joiValidation");
 const jwt = require("jsonwebtoken");
 const { SECRET } = process.env;
 
 async function signup(req, res) {
   // joi validation
-  const { error } = authSchema.validate(req.body);
+  const { error } = userSchema.validate(req.body);
   if (error) {
     res.status(400);
     throw new Error(error.message);
   }
 
-  const { email, password } = req.body;
-  console.log(email);
+  const email = req.body.email.trim();
+  const password = req.body.password.trim();
+
   // get and verify data
   if (!email || !password) {
     res.status(400);
@@ -27,7 +28,7 @@ async function signup(req, res) {
   }
 
   // if not - hash password and create user
-  const newUser = await User.create({ ...req.body });
+  const newUser = await User.create({ ...req.body, email, password });
   newUser.setPassword(password);
 
   // generate token
@@ -43,8 +44,9 @@ async function signup(req, res) {
     throw new Error("Unable create user");
   }
 
+  const { name, cityRegion, mobilePhone, accessToken } = newUser;
   return res.status(201).json({
-    user: newUser,
+    user: { email: newUser.email, name, cityRegion, mobilePhone, accessToken },
   });
 }
 
