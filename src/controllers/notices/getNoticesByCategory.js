@@ -1,16 +1,11 @@
 const { Notice } = require("../../schemas/notice");
 
 async function getNoticesByCategory(req, res) {
-  try {
-    const query = req.query.category;
+  const query = req.query.category;
 
-    const result = await Notice.find({ category: query });
+  const result = await Notice.find({ category: query });
 
-    res.json(result);
-  } catch (error) {
-    res.status(500);
-    throw new Error(error);
-  }
+  return res.status(200).json(result);
 }
 
 module.exports = getNoticesByCategory;
