@@ -1,9 +1,9 @@
 const { User } = require("../../schemas/user");
-const { authSchema } = require("../../schemas/joiValidation");
+const { userSchema } = require("../../schemas/joiValidation");
 
 async function edit(req, res) {
   // joi validation
-  const { error } = authSchema.validate(req.body);
+  const { error } = userSchema.validate(req.body);
   if (error) {
     res.status(400);
     throw new Error(error.message);

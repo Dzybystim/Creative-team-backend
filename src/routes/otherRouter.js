@@ -8,8 +8,11 @@ const { uploadMiddleware, urlToAvatar } = require("../middlewares/upload");
 
 const router = express.Router();
 
-router.get("/servicesSidebar", servicesSidebarController.servicesSidebar);
-router.get("/news", newsController.news);
+router.get(
+  "/servicesSidebar",
+  asyncHandler(servicesSidebarController.servicesSidebar)
+);
+router.get("/news", asyncHandler(newsController.news));
 router.get(
   "/userAndPets",
   authMiddleware,

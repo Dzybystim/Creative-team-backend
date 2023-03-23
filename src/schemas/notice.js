@@ -34,9 +34,8 @@ const noticeSchema = mongoose.Schema(
     },
     sex: {
       type: String,
-      enum: ["male", "female", null],
-      // required: [true, "Sex is required"],
-      default: null,
+      enum: ["male", "female"],
+      required: [true, "Sex is required"],
     },
     location: {
       type: String,

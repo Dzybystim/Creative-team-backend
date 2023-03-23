@@ -1,26 +1,22 @@
+const { noticeSchema } = require("../../schemas/joiValidation");
 const { Notice } = require("../../schemas/notice");
-const { User } = require("../../schemas/user");
 
 async function addUserNotice(req, res) {
-  try {
-    const query = req.query.category;
-    const { _id: owner } = req.user;
-
-    const createNotice = await Notice.create({
-      category: query,
-      ...req.body,
-      owner,
-    });
-
-    await User.findByIdAndUpdate(owner, {
-      $addToSet: { notices: createNotice._id },
-    });
-
-    res.json(createNotice);
-  } catch (error) {
-    res.status(500);
-    throw new Error(error);
+  // joi validation
+  const { error } = noticeSchema.validate(req.body);
+  if (error) {
+    res.status(400);
+    throw new Error(error.message);
   }
+
+  const { _id: owner } = req.user;
+  const createNotice = await Notice.create({ ...req.body, owner });
+
+  // await User.findByIdAndUpdate(owner, {
+  //   $addToSet: { notices: createNotice._id },
+  // });
+
+  return res.status(201).json(createNotice);
 }
 
 module.exports = addUserNotice;
