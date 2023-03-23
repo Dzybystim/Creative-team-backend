@@ -11,10 +11,8 @@ const PORT = process.env.PORT || 3000;
 async function server() {
   try {
     await mongoose.connect(MONGODB_URI);
-    console.log("Database connection successful");
     app.listen(PORT, (err) => {
       if (err) console.error("Error start server:", err);
-      console.log(`Server running. Use our API on port: ${PORT}`);
     });
   } catch (error) {
     console.error("Error connect to MONGODB", error.message);
