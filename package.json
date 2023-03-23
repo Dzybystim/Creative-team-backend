@@ -16,7 +16,6 @@
     "dotenv": "^16.0.3",
     "express": "4.17.1",
     "express-async-handler": "^1.2.0",
-    "fs": "^0.0.1-security",
     "joi": "^17.8.4",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
