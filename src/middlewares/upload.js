@@ -48,7 +48,9 @@ async function urlToAvatar(req, res, next) {
   try {
     const url = await uploadToCloud(filename, storeImage);
     await fs.unlink(filepath);
-    return res.status(200).json({ urlAvatar: url });
+    req.user.urlUploaded = url;
+    next();
+    // return res.status(200).json({ urlAvatar: url });
   } catch (error) {
     console.error("Error", error.message);
     return res.status(500).json({ message: error.message });

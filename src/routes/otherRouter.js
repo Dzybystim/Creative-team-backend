@@ -1,8 +1,12 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const { servicesSidebarController } = require("../controllers");
-const { newsController } = require("../controllers");
-const { userAndPetsController } = require("../controllers");
+const {
+  servicesSidebarController,
+  newsController,
+  userAndPetsController,
+  userController,
+} = require("../controllers");
+
 const { authMiddleware } = require("../middlewares/auth");
 const { uploadMiddleware, urlToAvatar } = require("../middlewares/upload");
 
@@ -22,7 +26,8 @@ router.post(
   "/uploadAvatar",
   authMiddleware,
   uploadMiddleware.single("avatar"),
-  urlToAvatar
+  urlToAvatar,
+  asyncHandler(userController.addAvatar)
 );
 
 module.exports = router;
