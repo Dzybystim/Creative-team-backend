@@ -7,11 +7,6 @@ async function searchByTitle(req, res) {
     title: { $regex: query, $options: "i" },
   });
 
-  if (searchResult.length === 0) {
-    res.status(404);
-    throw new Error("We did not find any notices for your request");
-  }
-
   return res.status(200).json(searchResult);
 }
 
