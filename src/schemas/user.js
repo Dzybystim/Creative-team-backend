@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema(
       default: null,
     },
     birthdate: {
-      type: Date,
+      type: String,
       default: null,
     },
     photoURL: {

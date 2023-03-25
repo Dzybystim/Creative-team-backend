@@ -679,7 +679,7 @@
                       "example": "text body"
                     },
                     "date": {
-                      "example": "2022-08-12T00:00:00.000Z"
+                      "example": "12.08.2022"
                     }
                   }
                 }
@@ -873,7 +873,7 @@
           "birthdate": {
             "type": "string",
             "description": "date",
-            "example": "2002-08-12T00:00:00.000Z"
+            "example": "12.08.2022"
           },
           "mobilePhone": {
             "type": "string",
@@ -899,7 +899,7 @@
           "date": {
             "type": "string",
             "description": "date",
-            "example": "2022-08-12T00:00:00.000Z"
+            "example": "12.08.2022"
           },
           "breed": {
             "type": "string",
@@ -937,7 +937,7 @@
           "birthdate": {
             "type": "string",
             "description": "date",
-            "example": "2022-08-12T00:00:00.000Z"
+            "example": "12.08.2022"
           },
           "breed": {
             "type": "string"
@@ -987,7 +987,7 @@
           "birthdate": {
             "type": "string",
             "description": "birthdate",
-            "example": "2022-08-12T00:00:00.000Z"
+            "example": "12.08.2022"
           },
           "breed": {
             "type": "string",

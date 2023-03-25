@@ -5,7 +5,7 @@ const newsSchema = mongoose.Schema(
     title: { type: String, default: null },
     url: { type: String, default: null },
     description: { type: String, default: null },
-    date: { type: Date, default: null },
+    date: { type: String, default: null },
   },
   {
     timestamps: true,
