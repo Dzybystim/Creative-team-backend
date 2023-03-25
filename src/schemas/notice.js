@@ -25,7 +25,7 @@ const noticeSchema = mongoose.Schema(
       default: null,
     },
     birthdate: {
-      type: Date,
+      type: String,
       default: null,
     },
     breed: {
