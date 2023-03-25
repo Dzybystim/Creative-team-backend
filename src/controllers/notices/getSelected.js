@@ -13,6 +13,7 @@ async function getSelected(req, res) {
     birthdate: 1,
     imageURL: 1,
     price: 1,
+    owner: 1,
   });
 
   return res.status(200).json(result);
