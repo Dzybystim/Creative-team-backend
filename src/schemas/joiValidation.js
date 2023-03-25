@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require("joi").extend(require("@joi/date"));
 
 const authSchema = Joi.object({
   email: Joi.string()
@@ -21,7 +21,7 @@ const userSchema = Joi.object({
   name: Joi.string().pattern(/^[\p{L}\p{M}_-]+$/u),
   cityRegion: Joi.string(),
   mobilePhone: Joi.string().pattern(/^\+380\d{9}$/),
-  birthdate: Joi.date(),
+  birthdate: Joi.date().format("DD.MM.YYYY"),
   photoURL: Joi.string(),
   selected: Joi.array(),
   notices: Joi.array(),
@@ -33,7 +33,7 @@ const noticeSchema = Joi.object({
   category: Joi.string().valid("sell", "lost-found", "for-free").required(),
   title: Joi.string().min(2).max(48),
   name: Joi.string().min(2).max(16),
-  birthdate: Joi.date(),
+  birthdate: Joi.date().format("DD.MM.YYYY"),
   breed: Joi.string().min(2).max(24),
   sex: Joi.string().valid("male", "female").required(),
   location: Joi.string(),
@@ -45,11 +45,19 @@ const noticeSchema = Joi.object({
 // Pets
 const petSchema = Joi.object({
   name: Joi.string().min(2).max(16),
-  date: Joi.date(),
+  date: Joi.date().format("DD.MM.YYYY"),
   breed: Joi.string().min(2).max(16),
   comments: Joi.string().min(8).max(120),
   photoURL: Joi.string(),
   owner: Joi.string(),
+});
+
+// News
+const newsSchema = Joi.object({
+  title: Joi.string(),
+  url: Joi.string(),
+  description: Joi.string(),
+  date: Joi.date().format(["DD/MM/YYYY", "DD.MM.YYYY"]),
 });
 
 module.exports = {
@@ -57,4 +65,5 @@ module.exports = {
   userSchema,
   noticeSchema,
   petSchema,
+  newsSchema,
 };
