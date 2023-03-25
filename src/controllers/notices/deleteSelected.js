@@ -6,9 +6,11 @@ async function deleteSelected(req, res) {
 
   await User.updateOne({ _id: owner }, { $pull: { selected: noticeId } });
 
-  return res.status(200).json({
-    message: "You have successfully deleted this notice from chosen ones",
+  const retUser = await User.findById(owner).select({
+    selected: 1,
   });
+
+  return res.status(200).json({ selected: retUser.selected });
 }
 
 module.exports = deleteSelected;
