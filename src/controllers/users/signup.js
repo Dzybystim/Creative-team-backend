@@ -44,9 +44,16 @@ async function signup(req, res) {
     throw new Error("Unable create user");
   }
 
-  const { name, cityRegion, mobilePhone, accessToken } = newUser;
+  const { name, cityRegion, mobilePhone, accessToken, selected } = newUser;
   return res.status(201).json({
-    user: { email: newUser.email, name, cityRegion, mobilePhone, accessToken },
+    user: {
+      email: newUser.email,
+      name,
+      cityRegion,
+      mobilePhone,
+      accessToken,
+      selected,
+    },
   });
 }
 
