@@ -11,7 +11,7 @@ async function news(req, res) {
       .status(200)
       .json(
         Object.values(searchResult).sort(
-          (a, b) => new Date(a.date) - new Date(b.date)
+          (a, b) => new Date(b.date) - new Date(a.date)
         )
       );
   }
@@ -21,7 +21,7 @@ async function news(req, res) {
   return res
     .status(200)
     .json(
-      Object.values(result).sort((a, b) => new Date(a.date) - new Date(b.date))
+      Object.values(result).sort((a, b) => new Date(b.date) - new Date(a.date))
     );
 }
 
