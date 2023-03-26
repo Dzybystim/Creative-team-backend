@@ -40,9 +40,10 @@ async function login(req, res) {
   }
 
   // return token
-  const { name, cityRegion, mobilePhone, accessToken, selected } = user;
+  const { _id, name, cityRegion, mobilePhone, accessToken, selected } = user;
   return res.status(200).json({
     user: {
+      id: _id,
       email: user.email,
       name,
       cityRegion,
