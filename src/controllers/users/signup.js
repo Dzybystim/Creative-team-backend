@@ -33,7 +33,7 @@ async function signup(req, res) {
 
   // generate token
   const payload = { id: newUser.id };
-  const token = jwt.sign(payload, SECRET, { expiresIn: "12h" });
+  const token = jwt.sign(payload, SECRET);
 
   // write token to user
   newUser.accessToken = token;
