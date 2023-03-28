@@ -14,8 +14,6 @@ async function deleteUserNotice(req, res) {
     throw new Error("Not found");
   }
 
-  // await User.updateOne({ _id: owner }, { $pull: { notices: noticeId } });
-
   return res.status(200).json({ message: "Notice successfully deleted!" });
 }
 

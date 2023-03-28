@@ -12,10 +12,6 @@ async function addUserNotice(req, res) {
   const { _id: owner } = req.user;
   const createNotice = await Notice.create({ ...req.body, owner });
 
-  // await User.findByIdAndUpdate(owner, {
-  //   $addToSet: { notices: createNotice._id },
-  // });
-
   return res.status(201).json(createNotice);
 }
 

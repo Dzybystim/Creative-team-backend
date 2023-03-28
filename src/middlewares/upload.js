@@ -52,7 +52,6 @@ async function urlToAvatar(req, res, next) {
   } catch (error) {
     console.error("Error", error.message);
     return res.status(500).json({ message: error.message });
-    // next(error);
   }
 }
 
