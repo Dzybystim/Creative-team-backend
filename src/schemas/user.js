@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-// email	      поле повинно містити валідний email
-// password	    будь-які літери та символи окрім пробілів. мін 7 символів максимум 32
-// name	        будь які літери
-// city/region	строка в форматі Місто, Область. Наприклад: Brovary, Kyiv або Akhtyrka, Sumy
-// mobile phone	строка в форматі +380671234567
 const userSchema = mongoose.Schema(
   {
     email: {
@@ -43,10 +38,6 @@ const userSchema = mongoose.Schema(
       type: String,
       default: null,
     },
-    // refreshToken: {
-    //   type: String,
-    //   default: null,
-    // },
   },
   {
     timestamps: true,
