@@ -12,13 +12,13 @@ async function addSelected(req, res) {
     throw new Error("Not found notice");
   }
 
-  const retSelected = await User.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     owner,
     { $addToSet: { selected: findNotice } },
     { new: true }
   ).select({ selected: 1 });
 
-  return res.status(200).json({ selected: retSelected.selected });
+  return res.status(200).json(findNotice);
 }
 
 module.exports = addSelected;
