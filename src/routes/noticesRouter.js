@@ -2,6 +2,8 @@ const express = require("express");
 const { noticeController } = require("../controllers");
 const { authMiddleware } = require("../middlewares/auth");
 const asyncHandler = require("express-async-handler");
+const { noticeSchema } = require("../schemas/joiValidation");
+const validation = require("../middlewares/validation");
 
 const router = express.Router();
 
@@ -21,6 +23,7 @@ router.get("/:noticeId", asyncHandler(noticeController.getNotice));
 router.post(
   "/user",
   authMiddleware,
+  validation(noticeSchema),
   asyncHandler(noticeController.addUserNotice)
 );
 router.post(

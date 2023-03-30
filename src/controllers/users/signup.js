@@ -1,16 +1,8 @@
 const { User } = require("../../schemas/user");
-const { userSchema } = require("../../schemas/joiValidation");
 const jwt = require("jsonwebtoken");
 const { SECRET } = process.env;
 
 async function signup(req, res) {
-  // joi validation
-  const { error } = userSchema.validate(req.body);
-  if (error) {
-    res.status(400);
-    throw new Error(error.message);
-  }
-
   const email = req.body.email.trim();
   const password = req.body.password.trim();
 
