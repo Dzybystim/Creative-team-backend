@@ -18,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
     const { id } = jwt.verify(token, SECRET);
 
     // find user
-    const user = await User.findById(id).select("email, accessToken");
+    const user = await User.findById(id);
 
     // if user's token doesn't match bearer token return error
     if (user.accessToken !== token) {

@@ -1,11 +1,9 @@
-const { User } = require("../../schemas/user");
 const { Notice } = require("../../schemas/notice");
 
 async function getSelected(req, res) {
-  const { id } = req.user;
-  const user = await User.findById(id);
+  const { selected } = req.user;
 
-  const result = await Notice.find({}).where("_id").in(user.selected).select({
+  const result = await Notice.find({}).where("_id").in(selected).select({
     category: 1,
     title: 1,
     breed: 1,

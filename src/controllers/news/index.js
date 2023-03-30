@@ -6,23 +6,12 @@ async function news(req, res) {
   if (query) {
     const searchResult = await New.find({
       title: { $regex: query, $options: "i" },
-    });
-    return res
-      .status(200)
-      .json(
-        Object.values(searchResult).sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
-        )
-      );
+    }).sort({ date: -1 });
+    return res.status(200).json(searchResult);
   }
 
-  const result = await New.find({});
-
-  return res
-    .status(200)
-    .json(
-      Object.values(result).sort((a, b) => new Date(b.date) - new Date(a.date))
-    );
+  const result = await New.find({}).sort({ date: -1 });
+  return res.status(200).json(result);
 }
 
 module.exports = {
