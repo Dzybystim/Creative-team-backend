@@ -1,5 +1,6 @@
 const Joi = require("joi").extend(require("@joi/date"));
 
+// Auth
 const authSchema = Joi.object({
   email: Joi.string()
     .trim()
